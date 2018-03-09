@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Header from './components/header'
 import Table from './components/table'
 import Loading from './components/loading'
-import logo from './logo.svg';
+
 import './App.css';
 
 const PATH_BASE = 'https://fcctop100.herokuapp.com/api/fccusers/top';
@@ -92,26 +93,23 @@ class App extends Component {
     ) || [];
       
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">FCC Camper Leaderboard</h1>
-        </header>
-        <div className="page">
-          { error ? <p>Something went wrong :(</p>
-            :
-            <Table 
+    <div className="App">
+      <Header />
+      <div className="page">
+        { error ? 
+          <p>Something went wrong :(</p>
+          :
+          <Table 
             list={list} 
             onChangeSortOn={this.onChangeSortOn}
             activeSortKey={reverseSortOn}/>
-          }
-           </div>
-           { isLoading  
-            ?  <Loading /> 
-              :
-              null
-            }
-    
+        }
+        { isLoading  ? 
+            <Loading /> 
+            :
+            null
+        }
+      </div>  
       </div>
     );
   }
