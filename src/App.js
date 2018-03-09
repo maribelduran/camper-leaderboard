@@ -12,77 +12,68 @@ class App extends Component {
     this.state= {
       results: null,
       isLoading: false,
-      searchKey: null,
+      reverseSortOn: null,
       error: null,
     }
     this.fetchTopRecentCampers = this.fetchTopRecentCampers.bind(this);
     this.fetchAllTimeCampers = this.fetchAllTimeCampers.bind(this);
     this.setCamperResults = this.setCamperResults.bind(this);
-    this.getCampersData - this.getCampersData.bind(this);
-    this.onSortSelect = this.onSortSelect.bind(this);
+    this.getCampersData = this.getCampersData.bind(this);
+    this.onChangeSortOn = this.onChangeSortOn.bind(this);
   }
 
   fetchTopRecentCampers() {
-    const searchKey = 'recent';
+    const reverseSortOn = 'recent';
     this.setState({
       isLoading: true,
-      searchKey: searchKey,
+      reverseSortOn: reverseSortOn,
     });
     
-    return fetch(`${PATH_BASE}/${searchKey}`)
+    return fetch(`${PATH_BASE}/${reverseSortOn}`)
     .then(response => response.json())
-   // .then(result => this.setCamperResults(result))
     .catch(e => this.setState({ error: e}));
   }  
 
   fetchAllTimeCampers(){
-    const searchKey = 'alltime';
+    const reverseSortOn = 'alltime';
     this.setState({
         isLoading: true,
-        searchKey: searchKey,
+        reverseSortOn: reverseSortOn,
     });
-   return  fetch(`${PATH_BASE}/${searchKey}`)
+
+   return  fetch(`${PATH_BASE}/${reverseSortOn}`)
     .then(response => response.json())
-   // .then(result => this.setCamperResults(result))
     .catch(e => this.setState({ error: e}));
   }
   
   setCamperResults(result) {
-    const {searchKey, results } = this.state
+    const {reverseSortOn, results } = this.state
     this.setState({ 
       results: {
         ...results, 
-        [searchKey]: result
+        [reverseSortOn]: result
       },
       isLoading: false
     });
   }
 
-  onSortSelect(selection){
-    const {results, searchKey} = this.state;
-   
-    if (!results[selection]){
-      console.log("should be fetching something")
-      if (selection === "alltime") this.fetchAllTimeCampers();
-      if (selection === "recent") this.fetchTopRecentCampers();
-    }else{
+  onChangeSortOn(sortOn){
       this.setState({
-        searchKey: selection,
+        reverseSortOn: sortOn,
       });
-    }
   }
 
   async getCampersData(){
-      try{
-        const recentCampers = await this.fetchTopRecentCampers();
-        this.setCamperResults(recentCampers);
-        const allTimeCampers = await this.fetchAllTimeCampers();
-        this.setCamperResults(allTimeCampers);
-      }
+    try{
+      const topRecentCampers = await this.fetchTopRecentCampers();
+      this.setCamperResults(topRecentCampers);
+      const allTimeCampers = await this.fetchAllTimeCampers();
+      this.setCamperResults(allTimeCampers);
+    }
       catch(e){
       this.setState({error: e});
       console.log('Error!', e);
-      } 
+    } 
   }
 
   componentDidMount() {
@@ -90,12 +81,12 @@ class App extends Component {
   }
 
   render() {
-    const {isLoading, results, searchKey, error} = this.state;
+    const {isLoading, results, reverseSortOn, error} = this.state;
     console.log(this.state);
 
     const list = (
       results &&
-      results[searchKey] 
+      results[reverseSortOn] 
     ) || [];
       
       return (
@@ -115,8 +106,10 @@ class App extends Component {
           <div className="interactions">
           { error ? <p>Something went wrong :(</p>
             :
-            <Table list={list} onSortSelect={this.onSortSelect}/>
-         
+            <Table 
+            list={list} 
+            onChangeSortOn={this.onChangeSortOn}
+            activeSortKey={reverseSortOn}/>
           }
            </div>
       </div>
