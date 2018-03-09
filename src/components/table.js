@@ -1,18 +1,22 @@
 import React from 'react';
+import './table.css';
 
-const Table = ({list}) => 
+const Table = ({list, onSortSelect}) => 
 <div className="table">
   <div className="table-header">
-    <span></span>
-    <span>Camper Name</span>
-    <span>Points in past 30 days</span>
-    <span>All Time Points</span>
+    <span className="clmn-width-10"></span>
+    <span className="clmn-width-40">Camper Name</span>
+    <span className="clmn-width-40"><button onClick={() => onSortSelect("recent")} >Points in Past 30 Days</button></span>
+    <span className="clmn-width-40"><button onClick={() => onSortSelect("alltime")} >All Time Points</button></span>
+  </div>
+  {list.map((item,index) => 
+    <div key={item.username} className="table-row">
+      <span className="clmn-width-10">{index+1}</span>
+      <span className="clmn-width-40">{item.username}</span>
+      <span className="clmn-width-40">{item.recent}</span>
+      <span className="clmn-width-40">{item.alltime}</span>
     </div>
-    {list.map((item,index) => 
-      <div key={item.username}>
-        {index+1} {item.username} {item.recent} {item.alltime}
-      </div>
-    )}
+  )}
 </div>
 
 export default Table;

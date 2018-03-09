@@ -16,8 +16,8 @@ class App extends Component {
     }
     this.fetchTopRecentCampers = this.fetchTopRecentCampers.bind(this);
     this.fetchAllTimeCampers = this.fetchAllTimeCampers.bind(this);
-    //this.setTopRecentCampers =this.setTopRecentCampers.bind(this);
     this.setCamperResults = this.setCamperResults.bind(this);
+    this.onSortSelect = this.onSortSelect.bind(this);
   }
   
   setCamperResults(result) {
@@ -31,7 +31,21 @@ class App extends Component {
     });
   }
 
-  //eventually change this to use async await
+  onSortSelect(selection){
+    const {results, searchKey} = this.state;
+   
+    console.log(this.state.searchKey);
+    if (!results[selection]){
+      console.log("should be fetching something")
+      if (selection === "alltime") this.fetchAllTimeCampers();
+      if (selection === "recent") this.fetchTopRecentCampers();
+    }else{
+      this.setState({
+        searchKey: selection,
+      });
+    }
+  }
+
   fetchTopRecentCampers() {
     const searchKey = 'recent';
     this.setState({
@@ -58,8 +72,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchAllTimeCampers();
-    this.fetchTopRecentCampers();
+  this.fetchTopRecentCampers();
   }
 
   render() {
@@ -86,7 +99,7 @@ class App extends Component {
             }
           </div>
           <div className="interactions">
-            <Table list={list}/>
+            <Table list={list} onSortSelect={this.onSortSelect}/>
           </div>
       </div>
       </div>
