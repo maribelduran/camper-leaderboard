@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Table from './components/table'
+import Loading from './components/loading'
 import logo from './logo.svg';
 import './App.css';
-import Table from './components/table'
 
 const PATH_BASE = 'https://fcctop100.herokuapp.com/api/fccusers/top';
 
@@ -26,7 +27,6 @@ class App extends Component {
     const reverseSortOn = 'recent';
     this.setState({
       isLoading: true,
-      reverseSortOn: reverseSortOn,
     });
     
     return fetch(`${PATH_BASE}/${reverseSortOn}`)
@@ -38,7 +38,6 @@ class App extends Component {
     const reverseSortOn = 'alltime';
     this.setState({
         isLoading: true,
-        reverseSortOn: reverseSortOn,
     });
 
    return  fetch(`${PATH_BASE}/${reverseSortOn}`)
@@ -46,12 +45,12 @@ class App extends Component {
     .catch(e => this.setState({ error: e}));
   }
   
-  setCamperResults(result) {
+  setCamperResults(result, resultType) {
     const {reverseSortOn, results } = this.state
     this.setState({ 
       results: {
         ...results, 
-        [reverseSortOn]: result
+        [resultType]: result
       },
       isLoading: false
     });
@@ -65,10 +64,15 @@ class App extends Component {
 
   async getCampersData(){
     try{
-      const topRecentCampers = await this.fetchTopRecentCampers();
-      this.setCamperResults(topRecentCampers);
       const allTimeCampers = await this.fetchAllTimeCampers();
-      this.setCamperResults(allTimeCampers);
+      this.setCamperResults(allTimeCampers, "alltime");
+      const lastFetchType =  "recent";
+      const topRecentCampers = await this.fetchTopRecentCampers();
+      this.setCamperResults(topRecentCampers, lastFetchType);
+      this.setState({
+        reverseSortOn: lastFetchType,
+      })
+
     }
       catch(e){
       this.setState({error: e});
@@ -82,28 +86,18 @@ class App extends Component {
 
   render() {
     const {isLoading, results, reverseSortOn, error} = this.state;
-    console.log(this.state);
-
     const list = (
       results &&
       results[reverseSortOn] 
     ) || [];
       
-      return (
+    return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">FCC Camper Leaderboard</h1>
         </header>
         <div className="page">
-          <div className="interactions">
-            { isLoading  
-            ?  <p>Loading...</p> 
-              :
-              null
-            }
-          </div>
-          <div className="interactions">
           { error ? <p>Something went wrong :(</p>
             :
             <Table 
@@ -112,7 +106,12 @@ class App extends Component {
             activeSortKey={reverseSortOn}/>
           }
            </div>
-      </div>
+           { isLoading  
+            ?  <Loading /> 
+              :
+              null
+            }
+    
       </div>
     );
   }
