@@ -8,7 +8,8 @@ const PATH_BASE = 'https://fcctop100.herokuapp.com/api/fccusers/top';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state={
+
+    this.state= {
       results: null,
       isLoading: false,
       searchKey: null,
@@ -17,7 +18,33 @@ class App extends Component {
     this.fetchTopRecentCampers = this.fetchTopRecentCampers.bind(this);
     this.fetchAllTimeCampers = this.fetchAllTimeCampers.bind(this);
     this.setCamperResults = this.setCamperResults.bind(this);
+    this.getCampersData - this.getCampersData.bind(this);
     this.onSortSelect = this.onSortSelect.bind(this);
+  }
+
+  fetchTopRecentCampers() {
+    const searchKey = 'recent';
+    this.setState({
+      isLoading: true,
+      searchKey: searchKey,
+    });
+    
+    return fetch(`${PATH_BASE}/${searchKey}`)
+    .then(response => response.json())
+   // .then(result => this.setCamperResults(result))
+    .catch(e => this.setState({ error: e}));
+  }  
+
+  fetchAllTimeCampers(){
+    const searchKey = 'alltime';
+    this.setState({
+        isLoading: true,
+        searchKey: searchKey,
+    });
+   return  fetch(`${PATH_BASE}/${searchKey}`)
+    .then(response => response.json())
+   // .then(result => this.setCamperResults(result))
+    .catch(e => this.setState({ error: e}));
   }
   
   setCamperResults(result) {
@@ -34,7 +61,6 @@ class App extends Component {
   onSortSelect(selection){
     const {results, searchKey} = this.state;
    
-    console.log(this.state.searchKey);
     if (!results[selection]){
       console.log("should be fetching something")
       if (selection === "alltime") this.fetchAllTimeCampers();
@@ -46,37 +72,25 @@ class App extends Component {
     }
   }
 
-  fetchTopRecentCampers() {
-    const searchKey = 'recent';
-    this.setState({
-      isLoading: true,
-      searchKey: searchKey,
-    });
-
-    fetch(`${PATH_BASE}/${searchKey}`)
-    .then(response => response.json())
-    .then(result => this.setCamperResults(result))
-    .catch(e => this.setState({ error: e}));
-  }  
-
-  fetchAllTimeCampers(){
-    const searchKey = 'alltime';
-    this.setState({
-        isLoading: true,
-        searchKey: 'alltime',
-    });
-    fetch(`${PATH_BASE}/${searchKey}`)
-    .then(response => response.json())
-    .then(result => this.setCamperResults(result))
-    .catch(e => this.setState({ error: e}));
+  async getCampersData(){
+      try{
+        const recentCampers = await this.fetchTopRecentCampers();
+        this.setCamperResults(recentCampers);
+        const allTimeCampers = await this.fetchAllTimeCampers();
+        this.setCamperResults(allTimeCampers);
+      }
+      catch(e){
+      this.setState({error: e});
+      console.log('Error!', e);
+      } 
   }
 
   componentDidMount() {
-  this.fetchTopRecentCampers();
+    this.getCampersData();
   }
 
   render() {
-    const {isLoading, results, searchKey} = this.state;
+    const {isLoading, results, searchKey, error} = this.state;
     console.log(this.state);
 
     const list = (
@@ -99,8 +113,12 @@ class App extends Component {
             }
           </div>
           <div className="interactions">
+          { error ? <p>Something went wrong :(</p>
+            :
             <Table list={list} onSortSelect={this.onSortSelect}/>
-          </div>
+         
+          }
+           </div>
       </div>
       </div>
     );
