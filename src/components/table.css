@@ -1,5 +1,5 @@
 .table {
-    margin: 20px 0;
+    margin: 40px 0;
 }
   
 .table-header {
@@ -7,28 +7,65 @@
     line-height: 24px;
     font-size: 16px;
     padding: 0 10px;
-    justify-content: space-between;
+   
 }
 
 .table-row {
   display: flex;
+  align-items: center;
   line-height: 24px;
   white-space: nowrap;
   margin: 10px 0;
   padding: 10px;
   background: #ffffff;
   border: 1px solid #e3e3e3;
+  
 }
+
+.table-header > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+}
+
+.table-row > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+}
+
 
 .table-clmn-10{
   width: 10%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  
 }
 
 .table-clmn-40{
   width: 40%;
-  text-align: top;
+  display: flex;
+  align-items: center;
 }
 
+.center-content{
+  justify-content: center;
+}
+
+
+
+
+
+
 .table-clmn-40 img{
-  max-width: 64px;
+  max-width: 40px;
+  width: inherit;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #2574A9;
 }

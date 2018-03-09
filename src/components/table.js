@@ -8,7 +8,7 @@ const Table = ({list, onChangeSortOn, activeSortKey }) =>
   <div className="table-header">
     <span className="table-clmn-10"></span>
     <span className="table-clmn-40">Camper Name</span>
-    <span className="table-clmn-40">
+    <span className="table-clmn-40 center-content">
       <Sort 
         sortKey={'recent'}
         onChangeSortOn={onChangeSortOn}
@@ -17,7 +17,7 @@ const Table = ({list, onChangeSortOn, activeSortKey }) =>
         Points in Past 30 Days
       </Sort>
     </span>
-    <span className="table-clmn-40">
+    <span className="table-clmn-40 center-content">
     <Sort 
         sortKey={'alltime'}
         onChangeSortOn={onChangeSortOn}
@@ -34,8 +34,8 @@ const Table = ({list, onChangeSortOn, activeSortKey }) =>
       <span className="table-clmn-40">
         <img src={item.img}/>
         <a href={`https://www.freecodecamp.org/${item.username}`} target="_blank">{item.username}</a></span>
-      <span className="table-clmn-40">{item.recent}</span>
-      <span className="table-clmn-40">{item.alltime}</span>
+      <span className="table-clmn-40 center-content">{item.recent}</span>
+      <span className="table-clmn-40 center-content">{item.alltime}</span>
     </div>
   )}
 </div>
