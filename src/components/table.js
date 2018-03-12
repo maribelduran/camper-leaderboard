@@ -32,7 +32,7 @@ const Table = ({list, onChangeSortOn, activeSortKey }) =>
     <div key={item.username} className="table-row">
       <span className="table-clmn-10">{index+1}</span>
       <span className="table-clmn-40">
-        <img src={item.img}/>
+        <img src={item.img} alt="User"/>
         <a href={`https://www.freecodecamp.org/${item.username}`} target="_blank">{item.username}</a></span>
       <span className="table-clmn-40 center-content">{item.recent}</span>
       <span className="table-clmn-40 center-content">{item.alltime}</span>
