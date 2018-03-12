@@ -47,7 +47,7 @@ class App extends Component {
   }
   
   setCamperResults(result, resultType) {
-    const {reverseSortOn, results } = this.state
+    const {results } = this.state
     this.setState({ 
       results: {
         ...results, 
@@ -110,6 +110,7 @@ class App extends Component {
             null
         }
       </div>  
+      <footer>Coded by Maribel Duran</footer>
       </div>
     );
   }
