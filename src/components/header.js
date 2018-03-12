@@ -4,9 +4,8 @@ import './header.css';
 
 const FreeCodeCampIcon = () =>  
 <div className="App-logo">
-  <i class="fa fa-free-code-camp fa-4x"></i>
+  <i className="fa fa-free-code-camp fa-4x"></i>
 </div>
-// <img src={logo} className="App-logo" alt="logo" />
 const Header = () => 
 <header className="App-header">
   <FreeCodeCampIcon />
