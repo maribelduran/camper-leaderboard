@@ -110,7 +110,7 @@ class App extends Component {
             null
         }
       </div>  
-      <footer>Coded by Maribel Duran</footer>
+      <footer><p>Coded by <a href="https://www.maribelduran.com/" target="_blank">Maribel Duran</a></p></footer>
       </div>
     );
   }
