@@ -11,10 +11,7 @@ const Button = ({onClick, className = '', children}) =>
   {children}
 </button>
 
-//Assign a props interface to a component
-//How to create a prop interface to a component
-//You take every argument from the function signature 
-//and assign a PropType to it!
+
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string,

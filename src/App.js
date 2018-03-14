@@ -73,9 +73,8 @@ class App extends Component {
       this.setState({
         reverseSortOn: lastFetchType,
       })
-
     }
-      catch(e){
+    catch(e){
       this.setState({error: e});
       console.log('Error!', e);
     } 

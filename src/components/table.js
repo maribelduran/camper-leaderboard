@@ -18,14 +18,13 @@ const Table = ({list, onChangeSortOn, activeSortKey }) =>
       </Sort>
     </span>
     <span className="table-clmn-40 center-content ">
-    <Sort 
+      <Sort 
         sortKey={'alltime'}
         onChangeSortOn={onChangeSortOn}
         activeSortKey={activeSortKey}
         >
         All Time Points
       </Sort>
-      
     </span>
   </div>
   {list.map((item,index) =>  
