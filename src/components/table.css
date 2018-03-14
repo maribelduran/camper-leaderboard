@@ -4,6 +4,7 @@
   
 .table-header {
     display: flex;
+    justify-content: center;
     line-height: 24px;
     font-size: 16px;
     padding: 0 5px;
@@ -36,9 +37,8 @@
 
 .table-clmn-10{
   width: 10%;
-  align-items: center;
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
 .table-clmn-40{
