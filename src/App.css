@@ -5,13 +5,22 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
-  
 }
 
 .page {
-  margin: 50px;
-  border: 2px solid grey;
- box-shadow: 10px 10px 10px 0px rgba(204, 204, 204, 0.75);
+  position: relative;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;;
+  width: 70%;
+  max-width: 900px;
+  border-style: solid;
+  border-width: thin;
+  border-color: #ccc;
+}
+
+.right-shadow{
+  box-shadow: 10px 10px 10px 0px rgba(204, 204, 204, 0.8);
 }
 
 .interactions {

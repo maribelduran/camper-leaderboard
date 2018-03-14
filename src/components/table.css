@@ -1,14 +1,13 @@
 .table {
-    margin: 40px 0;
-    
+    margin: 40px 0;   
 }
   
 .table-header {
     display: flex;
     line-height: 24px;
     font-size: 16px;
-    padding: 0 10px;
-   
+    padding: 0 5px;
+    margin-bottom: 30px;
 }
 
 .table-row {
@@ -19,10 +18,8 @@
   margin: 10px 0;
   padding: 10px;
   background: #ffffff;
-  border: 1px solid #e3e3e3;
-  border-radius: 0.3rem;
-  box-shadow: 10px 10px 30px rgba(0,0,0,0.2); 
-  
+  border: 0.2px solid #ccc;
+  border-radius: 8px; 
 }
 
 .table-header > span {
@@ -37,13 +34,11 @@
   padding: 0 5px;
 }
 
-
 .table-clmn-10{
   width: 10%;
   align-items: center;
   display: flex;
   justify-content: center;
-  
 }
 
 .table-clmn-40{
@@ -55,11 +50,6 @@
 .center-content{
   justify-content: center;
 }
-
-
-
-
-
 
 .table-clmn-40 img{
   max-width: 40px;

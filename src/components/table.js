@@ -6,7 +6,7 @@ const Table = ({list, onChangeSortOn, activeSortKey }) =>
 
 <div className="table">
   <div className="table-header">
-    <span className="table-clmn-10"></span>
+    <span className="table-clmn-10 "></span>
     <span className="table-clmn-40">Camper Name</span>
     <span className="table-clmn-40 center-content">
       <Sort 
@@ -17,7 +17,7 @@ const Table = ({list, onChangeSortOn, activeSortKey }) =>
         Points in Past 30 Days
       </Sort>
     </span>
-    <span className="table-clmn-40 center-content">
+    <span className="table-clmn-40 center-content ">
     <Sort 
         sortKey={'alltime'}
         onChangeSortOn={onChangeSortOn}
@@ -29,7 +29,7 @@ const Table = ({list, onChangeSortOn, activeSortKey }) =>
     </span>
   </div>
   {list.map((item,index) =>  
-    <div key={item.username} className="table-row">
+    <div key={item.username} className="table-row right-shadow">
       <span className="table-clmn-10">{index+1}</span>
       <span className="table-clmn-40">
         <img src={item.img} alt="User"/>

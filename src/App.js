@@ -95,7 +95,7 @@ class App extends Component {
     return (
     <div className="App">
       <Header />
-      <div className="page">
+      <div className="page right-shadow">
         { error ? 
           <p>Something went wrong :(</p>
           :
