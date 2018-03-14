@@ -8,9 +8,15 @@
     font-size: inherit;
     cursor: pointer;
     outline: none;
-  }
+    text-shadow: 3px 3px 3px #ccc !important;
+    transition: 0.3s ease-in;
+}
+
+.button-inline:hover{
+    font-size: 18px;
+}
   
-  .button-active {
+.button-active {
     border-radius: 0;
     border-bottom: 1px solid #38BB6C;
-  }
+}
